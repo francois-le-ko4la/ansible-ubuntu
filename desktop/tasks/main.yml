@@ -1,0 +1,15 @@
+---
+- name: Install list of packages
+  apt: name={{item}} state=installed
+  with_items:
+          - ubuntu-restricted-extras
+          - libavcodec-extra
+          - shutter
+          - openshot
+          - gimp
+          - vlc
+          - keepass2
+          - vim
+          - vim-doc
+          - vim-scripts
+

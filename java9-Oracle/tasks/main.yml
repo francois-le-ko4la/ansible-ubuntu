@@ -1,0 +1,31 @@
+---
+- name: Check if Java is installed
+  stat:
+          path: /usr/lib/jvm/java-9-oracle/lib/libjsound.so
+  register: java_check_deb
+  changed_when: java_check_deb.stat.exists == False
+
+- name: Install add-apt-repostory
+  become: yes
+  apt: name=software-properties-common state=latest
+  when: java_check_deb.stat.exists == False
+
+- name: Add Oracle Java Repository
+  become: yes
+  apt_repository: repo='ppa:webupd8team/java'
+  when: java_check_deb.stat.exists == False
+
+- name: Accept Java 9 License
+  become: yes
+  debconf: name='oracle-java9-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
+  when: java_check_deb.stat.exists == False
+
+- name: Install Oracle Java 9
+  become: yes
+  apt: name={{item}} state=latest
+  with_items:
+          - oracle-java9-installer
+          - ca-certificates
+          - oracle-java9-set-default
+  when: java_check_deb.stat.exists == False
+

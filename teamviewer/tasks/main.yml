@@ -1,0 +1,23 @@
+---
+
+#https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+#deb http://linux.teamviewer.com/deb stable main
+
+- name: Check if TeamViewer is installed
+  stat:
+          path: /usr/bin/teamviewer
+  register: teamviewer_check_deb
+  changed_when: teamviewer_check_deb.stat.exists == False
+
+- name: Add TeamViewer PPA
+  apt_repository:
+          repo: deb http://linux.teamviewer.com/deb stable main
+          state: present
+          filename: 'teamviewer'
+          update_cache: yes
+  when: teamviewer_check_deb.stat.exists == False
+
+- name: Install list of packages
+  apt: name=teamviewer-host state=installed
+  when: teamviewer_check_deb.stat.exists == False
+

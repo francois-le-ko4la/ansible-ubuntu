@@ -1,0 +1,24 @@
+---
+- name: Create and mount virtual drive
+  mount:
+          name: /media/virtualram
+          src: tmpfs
+          fstype: tmpfs
+          opts: defaults,size=4G
+          state: mounted
+- name: Check the folder
+  stat: path=/var/cache/apt/archives
+  register: apt_archives
+
+- name: Remove the folder
+  file: path=/var/cache/apt/archives state=absent
+  when: apt_archives.stat.isdir
+
+- name: Setup symlink
+  file:
+          path: /var/cache/apt/archives
+          src: /media/virtualram
+          state: link
+          force: yes
+  when: apt_archives.stat.isdir
+

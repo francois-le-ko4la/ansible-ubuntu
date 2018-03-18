@@ -1,0 +1,13 @@
+---
+- name: Install list of packages
+  apt: name={{item}} state=installed
+  with_items:
+          - aptitude
+          - ppa-purge
+          - intel-microcode
+          - htop
+          - preload
+          - deborphan
+          - indicator-multiload
+          - gparted
+

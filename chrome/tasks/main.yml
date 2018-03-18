@@ -1,0 +1,26 @@
+---
+
+
+- name: Check if Chrome is installed
+  stat:
+          path: /usr/bin/google-chrome-stable
+  register: chrome_check_deb
+  changed_when: chrome_check_deb.stat.exists == False
+
+
+- name: "Get google linux key"
+  apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub state=present
+  when: chrome_check_deb.stat.exists == False
+
+- name: Add Google PPA
+  apt_repository:
+          repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+          state: present
+          filename: 'google-chrome'
+          update_cache: yes
+  when: chrome_check_deb.stat.exists == False
+
+- name: Install list of packages
+  apt: name=google-chrome-stable state=installed
+  when: chrome_check_deb.stat.exists == False
+

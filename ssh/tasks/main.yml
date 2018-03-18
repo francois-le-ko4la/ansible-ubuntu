@@ -1,0 +1,10 @@
+---
+- name: Install openssh server and fail2ban
+  apt: name={{item}} state=installed
+  with_items:
+          - fail2ban
+          - openssh-server
+
+- name: Ensure fail2ban starts on a fresh reboot
+  service: name=fail2ban state=started enabled=yes
+

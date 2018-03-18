@@ -1,0 +1,23 @@
+---
+
+#https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+#deb http://linux.teamviewer.com/deb stable main
+
+- name: Check if Skype is installed
+  stat:
+          path: /opt/skypeforlinux/skypeforlinux
+  register: skype_check_deb
+  changed_when: skype_check_deb.stat.exists == False
+
+- name: Add Skype PPA
+  apt_repository:
+          repo: deb [arch=amd64] https://repo.skype.com/deb stable main
+          state: present
+          filename: 'skype-stable'
+          update_cache: yes
+  when: skype_check_deb.stat.exists == False
+
+- name: Install list of packages
+  apt: name=skypeforlinux state=installed
+  when: skype_check_deb.stat.exists == False
+

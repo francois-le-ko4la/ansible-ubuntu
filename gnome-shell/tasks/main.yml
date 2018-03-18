@@ -1,0 +1,8 @@
+
+---
+
+- name: Install list of packages
+  apt: name={{item}} state=installed
+  with_items:
+          - gnome-shell-extension-caffeine
+

@@ -1,0 +1,12 @@
+---
+- name: Delete SWAP mountpoint
+  lineinfile:
+          dest: /etc/fstab
+          state: absent
+          regexp: 'swapfile'
+  register: del_swap
+
+- name: Turn swap off
+  command: swapoff -a
+  when: del_swap.changed
+
