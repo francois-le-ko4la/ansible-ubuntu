@@ -25,6 +25,7 @@ Lesser General Public License for more details.
     cd /tmp
     git clone https://github.com/francois-le-ko4la/ansible-ubuntu.git
 ### Use playbook
+    cd ansible-ubuntu
     ansible-playbook playbook_ubuntu.yml -K
 
 ## Ubuntu release
