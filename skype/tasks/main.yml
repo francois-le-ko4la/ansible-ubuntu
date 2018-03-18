@@ -1,8 +1,4 @@
 ---
-
-#https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
-#deb http://linux.teamviewer.com/deb stable main
-
 - name: Check if Skype is installed
   stat:
           path: /opt/skypeforlinux/skypeforlinux
