@@ -18,6 +18,6 @@
   when: teamviewer_check_deb.stat.exists == False
 
 - name: Install list of packages
-  apt: name=teamviewer-host state=installed
+  apt: name=teamviewer-host state=present
   when: teamviewer_check_deb.stat.exists == False
 

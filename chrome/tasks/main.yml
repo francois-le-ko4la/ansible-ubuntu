@@ -21,6 +21,6 @@
   when: chrome_check_deb.stat.exists == False
 
 - name: Install list of packages
-  apt: name=google-chrome-stable state=installed
+  apt: name=google-chrome-stable state=present
   when: chrome_check_deb.stat.exists == False
 

@@ -1,6 +1,6 @@
 ---
 - name: Install list of packages
-  apt: name={{item}} state=installed
+  apt: name={{item}} state=present
   with_items:
           - ubuntu-restricted-extras
           - libavcodec-extra
@@ -12,4 +12,5 @@
           - vim
           - vim-doc
           - vim-scripts
+          - python3-pip
 

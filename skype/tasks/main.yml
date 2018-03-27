@@ -14,6 +14,6 @@
   when: skype_check_deb.stat.exists == False
 
 - name: Install list of packages
-  apt: name=skypeforlinux state=installed
+  apt: name=skypeforlinux state=present
   when: skype_check_deb.stat.exists == False
 
