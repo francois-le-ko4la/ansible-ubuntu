@@ -14,4 +14,6 @@
           - vim-scripts
           - python3-pip
           - python3-examples
+          - python3-pycodestyle
+          - pycodestyle
 
