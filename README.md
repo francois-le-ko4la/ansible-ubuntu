@@ -29,5 +29,4 @@ Lesser General Public License for more details.
     ansible-playbook playbook_ubuntu.yml -K
 
 ## Ubuntu release
-17.10 tested/validated
-
+17.10/18.04 tested/validated
